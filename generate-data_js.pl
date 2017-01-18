@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 ##########################################################################
 # generate-data_js.pl - Generate data.js for dotabuffcp                  #
 # Copyright (C) <2014>  Onur Aslan  <onuraslan@gmail.com>                #
@@ -10,6 +10,7 @@
 use strict;
 use warnings;
 use LWP::Simple;
+use LWP::Protocol;
 use JSON;
 use POSIX qw/strftime/;
 
@@ -71,7 +72,7 @@ sub get_winrates_of_hero {
   my $content = get ('http://dotabuff.com/heroes/' .
                      hero_link ($hero) .
                      '/matchups') or die;
-  
+
   my (@wr) = $content =~ /<dl><dd><span class="(?:won|lost)">(.*?)%<\/span><\/dd><dt>Win Rate<\/dt><\/dl>/g;
   $heroes_wr[$hid] = $wr[0];
 
